@@ -101,6 +101,8 @@ However, in development, I still want to be able to use git to vary one subflake
 e.g. I want to be able to `git bisect` only one subflake.
 For this reason the subflake repositories are not remote but included in the parent flake.
 
+TODO: subtrees don't actually allow for `git bisect`, but maybe you can at least alter the flake input to get a version of that subtree from the past?
+
 So my strategy is to create repositories in `./subflake-git` like `git init --bare` and then use them as the "remote" for a git subtree around each flake.
 But they're just in the parent directory, so they're not actually remote at all.
 
