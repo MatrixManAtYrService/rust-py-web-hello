@@ -5,17 +5,14 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
 
-    # Relative path input to sibling hello-rs flake
-    hello-rs.url = "path:../hello-rs";
-
-    # For creating pure test environments
-    pyproject-nix = {
-      url = "github:pyproject-nix/pyproject.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+    hello-rs = {
+      url = "git+file:///Users/matt/src/hello-subflake/subflake-git/hello-rs?ref=main";
+      flake = false;
     };
+
   };
 
-  outputs = { self, nixpkgs, flake-utils, hello-rs, pyproject-nix }:
+  outputs = { self, nixpkgs, flake-utils, hello-rs}:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
@@ -24,6 +21,28 @@
 
         python = pkgs.python312;
 
+        # Filter to exclude build artifacts and dev directories
+        helloPySrc = builtins.path {
+          path = ./.;
+          name = "hello-py-source";
+          filter = path: type:
+            let
+              baseName = baseNameOf path;
+            in
+              # Exclude common build artifacts and dev directories
+              baseName != ".venv" &&
+              baseName != "venv" &&
+              baseName != ".direnv" &&
+              baseName != "result" &&
+              baseName != "target" &&
+              baseName != "__pycache__" &&
+              baseName != ".pytest_cache" &&
+              baseName != "dist";
+        };
+
+        # Reference hello-rs source from the non-flake input
+        helloRsSrc = hello-rs;
+
         # Build the wheel using maturin
         # Need to include hello-rs source for the build
         helloPyWheel = pkgs.stdenv.mkDerivation {
@@ -31,12 +50,22 @@
           version = "0.1.0";
           src = pkgs.runCommand "hello-py-src" {} ''
             mkdir -p $out
-            cp -r ${./.}/* $out/
+            # Copy hello-py source files (filtered to exclude build artifacts)
+            cp -r ${helloPySrc}/* $out/
             chmod -R +w $out
-            mkdir -p $out/hello-rs
-            cp -r ${../hello-rs}/* $out/hello-rs/
+
+            # Copy hello-rs source (referenced via builtins.path)
+            cp -r ${helloRsSrc} $out/hello-rs
+            chmod -R +w $out/hello-rs
+
             # Update the Cargo.toml path to point to ./hello-rs instead of ../hello-rs
             sed -i 's|path = "../hello-rs"|path = "./hello-rs"|' $out/Cargo.toml
+
+            # Update flake.lock to also use ./hello-rs instead of ../hello-rs
+            # This prevents Nix from trying to resolve ../hello-rs during the build
+            if [ -f $out/flake.lock ]; then
+              sed -i 's|"path": "../hello-rs"|"path": "./hello-rs"|g' $out/flake.lock
+            fi
           '';
 
           cargoDeps = pkgs.rustPlatform.importCargoLock {
@@ -63,7 +92,7 @@
         };
 
         # Create a Python package from the wheel
-        helloPyPackage = python.pkgs.buildPythonPackage rec {
+        helloPyPackage = python.pkgs.buildPythonPackage {
           pname = "hello_py";
           version = "0.1.0";
           format = "other";  # Using custom install phase
@@ -139,8 +168,6 @@
         packages = {
           default = testEnv;
           wheel = helloPyWheel;
-          # Re-export the Rust library from the subflake
-          hello-rs = hello-rs.packages.${system}.default;
           # Expose test environment for debugging
           test-env = testEnv;
         };
