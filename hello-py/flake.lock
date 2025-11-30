@@ -21,18 +21,18 @@
     "hello-rs": {
       "flake": false,
       "locked": {
-        "lastModified": 1764512025,
-        "narHash": "sha256-FMMwXZ5bOnic7ylVo+XzZ55CeS+dZWpy3r3UgTqzJPg=",
+        "lastModified": 1764520577,
+        "narHash": "sha256-KBvnWRG94gXT19t4B1+fLM74Nu2w29t/NL+rGpdLQ3k=",
         "ref": "main",
-        "rev": "28fdaf8f2488f6758a9b4dc6fac7ef6b14ef1e5c",
-        "revCount": 1,
+        "rev": "1745fa6728aa7b38282505eb9f4f82498916fe6a",
+        "revCount": 2,
         "type": "git",
-        "url": "file:///Users/matt/src/hello-subflake/subflake-git/hello-rs"
+        "url": "file:///Users/matt/src/hello-subflakes/subflake-git/hello-rs"
       },
       "original": {
         "ref": "main",
         "type": "git",
-        "url": "file:///Users/matt/src/hello-subflake/subflake-git/hello-rs"
+        "url": "file:///Users/matt/src/hello-subflakes/subflake-git/hello-rs"
       }
     },
     "nixpkgs": {

@@ -6,7 +6,7 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     # Git input to hello-wasm local repository
-    hello-wasm.url = "git+file:///Users/matt/src/hello-subflake/subflake-git/hello-wasm?ref=main";
+    hello-wasm.url = "git+file:///Users/matt/src/hello-subflakes/subflake-git/hello-wasm?ref=main";
   };
 
   outputs = { self, nixpkgs, flake-utils, hello-wasm }:

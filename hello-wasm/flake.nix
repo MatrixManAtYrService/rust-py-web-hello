@@ -10,7 +10,7 @@
     };
 
     # Source-only input - we just need the Rust code, not the flake outputs
-    hello-rs.url = "git+file:///Users/matt/src/hello-subflake/subflake-git/hello-rs?ref=main";
+    hello-rs.url = "git+file:///Users/matt/src/hello-subflakes/subflake-git/hello-rs?ref=main";
     hello-rs.flake = false;
   };
 

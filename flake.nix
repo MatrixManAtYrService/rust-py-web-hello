@@ -6,10 +6,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Git input to hello-py local repository
-    hello-py.url = "git+file:///Users/matt/src/hello-subflake/subflake-git/hello-py?ref=main";
+    hello-py.url = "git+file:///Users/matt/src/hello-subflakes/subflake-git/hello-py?ref=main";
 
     # Git input to hello-web local repository
-    hello-web.url = "git+file:///Users/matt/src/hello-subflake/subflake-git/hello-web?ref=main";
+    hello-web.url = "git+file:///Users/matt/src/hello-subflakes/subflake-git/hello-web?ref=main";
 
     pyproject-nix = {
       url = "github:pyproject-nix/pyproject.nix";

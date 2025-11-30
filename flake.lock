@@ -54,6 +54,24 @@
         "type": "github"
       }
     },
+    "flake-utils_4": {
+      "inputs": {
+        "systems": "systems_4"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "hello-py": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -61,14 +79,19 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "path": "./hello-py",
-        "type": "path"
+        "lastModified": 1764520622,
+        "narHash": "sha256-gsgL+wKkoGoZ0C3XkzgNwNuFggpfsCT8qrrc0cooXgo=",
+        "ref": "main",
+        "rev": "63ab0615bca116bd08acddb36b2a8c15acad11ce",
+        "revCount": 4,
+        "type": "git",
+        "url": "file:///Users/matt/src/hello-subflakes/subflake-git/hello-py"
       },
       "original": {
-        "path": "./hello-py",
-        "type": "path"
-      },
-      "parent": []
+        "ref": "main",
+        "type": "git",
+        "url": "file:///Users/matt/src/hello-subflakes/subflake-git/hello-py"
+      }
     },
     "hello-rs": {
       "flake": false,
@@ -87,20 +110,65 @@
         "url": "file:///Users/matt/src/hello-subflake/subflake-git/hello-rs"
       }
     },
+    "hello-rs_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1764512025,
+        "narHash": "sha256-FMMwXZ5bOnic7ylVo+XzZ55CeS+dZWpy3r3UgTqzJPg=",
+        "ref": "main",
+        "rev": "28fdaf8f2488f6758a9b4dc6fac7ef6b14ef1e5c",
+        "revCount": 1,
+        "type": "git",
+        "url": "file:///Users/matt/src/hello-subflake/subflake-git/hello-rs"
+      },
+      "original": {
+        "ref": "main",
+        "type": "git",
+        "url": "file:///Users/matt/src/hello-subflake/subflake-git/hello-rs"
+      }
+    },
+    "hello-wasm": {
+      "inputs": {
+        "flake-utils": "flake-utils_4",
+        "hello-rs": "hello-rs_2",
+        "nixpkgs": "nixpkgs_2",
+        "rust-overlay": "rust-overlay"
+      },
+      "locked": {
+        "lastModified": 1764518795,
+        "narHash": "sha256-MQSnOCqnbC/0TZ5YjlYIE7akbMB61A6TvL75qWIOeT0=",
+        "ref": "main",
+        "rev": "f53107fe89f4e8193adb8a2e7397649309926185",
+        "revCount": 2,
+        "type": "git",
+        "url": "file:///Users/matt/src/hello-subflake/subflake-git/hello-wasm"
+      },
+      "original": {
+        "ref": "main",
+        "type": "git",
+        "url": "file:///Users/matt/src/hello-subflake/subflake-git/hello-wasm"
+      }
+    },
     "hello-web": {
       "inputs": {
         "flake-utils": "flake-utils_3",
-        "nixpkgs": "nixpkgs_2"
+        "hello-wasm": "hello-wasm",
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "path": "./hello-rs",
-        "type": "path"
+        "lastModified": 1764520711,
+        "narHash": "sha256-+noxI7/9vibyj5AXBUU7Ul6QR0x01rpQiSyeLJmcd80=",
+        "ref": "main",
+        "rev": "ebe5bd3bfa4a93393559c611f685720c61bec544",
+        "revCount": 3,
+        "type": "git",
+        "url": "file:///Users/matt/src/hello-subflakes/subflake-git/hello-web"
       },
       "original": {
-        "path": "./hello-rs",
-        "type": "path"
-      },
-      "parent": []
+        "ref": "main",
+        "type": "git",
+        "url": "file:///Users/matt/src/hello-subflakes/subflake-git/hello-web"
+      }
     },
     "nixpkgs": {
       "locked": {
@@ -135,6 +203,22 @@
       }
     },
     "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1764242076,
+        "narHash": "sha256-sKoIWfnijJ0+9e4wRvIgm/HgE27bzwQxcEmo2J/gNpI=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "2fad6eac6077f03fe109c4d4eb171cf96791faa4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1764242076,
         "narHash": "sha256-sKoIWfnijJ0+9e4wRvIgm/HgE27bzwQxcEmo2J/gNpI=",
@@ -201,10 +285,32 @@
         "flake-utils": "flake-utils",
         "hello-py": "hello-py",
         "hello-web": "hello-web",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "pyproject-build-systems": "pyproject-build-systems",
         "pyproject-nix": "pyproject-nix",
         "uv2nix": "uv2nix"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "hello-web",
+          "hello-wasm",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1764470739,
+        "narHash": "sha256-sa9f81B1dWO16QtgDTWHX8DQbiHKzHndpaunY5EQtwE=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "3bfa664055e1a09c6aedab5533c5fc8d6ca5741a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     },
     "systems": {
@@ -238,6 +344,21 @@
       }
     },
     "systems_3": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_4": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
