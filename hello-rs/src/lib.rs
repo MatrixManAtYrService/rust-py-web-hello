@@ -7,7 +7,7 @@
 /// assert_eq!(hello("world"), "hello world");
 /// ```
 pub fn hello(name: &str) -> String {
-    format!("hello {}", name)
+    format!("goodbye {}", name)
 }
 
 #[cfg(test)]
