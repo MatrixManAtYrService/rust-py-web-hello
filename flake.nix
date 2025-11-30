@@ -5,8 +5,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
 
-    # Relative path input to sibling hello-wasm flake
-    hello-wasm.url = "path:../hello-wasm";
+    # Git input to hello-wasm local repository
+    hello-wasm.url = "git+file:///Users/matt/src/hello-subflake/subflake-git/hello-wasm?ref=main";
   };
 
   outputs = { self, nixpkgs, flake-utils, hello-wasm }:
@@ -74,7 +74,6 @@
           hello-web = helloWebApp;
           # Re-export packages from subflakes
           hello-wasm = hello-wasm.packages.${system}.default;
-          hello-rs = hello-wasm.packages.${system}.hello-rs;
         };
 
         devShells.default = pkgs.mkShell {
