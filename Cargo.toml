@@ -1,0 +1,11 @@
+[package]
+name = "hello-wasm"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+wit-bindgen = "0.39.0"
+hello-rs = { path = "../hello-rs" }
+
+[lib]
+crate-type = ["cdylib", "rlib"]
